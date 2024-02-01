@@ -3,14 +3,14 @@ import { resolve } from "path";
 
 import { MESSAGES } from "../utils/constants.js";
 
-export const cat = (path) => {
+export const cat = async (path) => {
     const readStream = createReadStream(resolve(process.cwd(), path));
     readStream.on("data", (chunk) => {
       process.stdout.write(chunk);
     });
 
     readStream.on("error", () => {
-        console.log(MESSAGES.failedOperation)
+      console.log(MESSAGES.failedOperation);
     });
 };
 
