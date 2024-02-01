@@ -9,5 +9,7 @@ export const MESSAGES = {
   failedOperation: highlightWords('Operation failed', 'red'),
   fileCreted: highlightWords('File successfully created!', 'green'),
   fileRenamed: highlightWords('File successfully renamed!', 'green'),
-
+  fileCopied: highlightWords('File successfully copied!', 'green'),
+  fileMoved: highlightWords('File successfully moved!', 'green'),
+  fileRemoved: highlightWords('File successfully removed!', 'green'),
 }

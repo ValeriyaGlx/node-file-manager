@@ -1,5 +1,4 @@
-import * as readline from "node:readline/promises";
-import { cd, up, ls, add, cat, rn } from "../nwdFunctions/index.js";
+import { cd, cp, up, ls, add, cat, rn, mv, remove } from "../nwdFunctions/index.js";
 
 import { MESSAGES } from "../utils/constants.js";
 
@@ -62,19 +61,19 @@ export const getCommand = async (input) => {
       if (argsInput.length !== 3) {
         return console.log(MESSAGES.invalidInput);
       }
-      // TODO
+      await cp(argsInput[1], argsInput[2]);
       break;
     case "mv":
       if (argsInput.length !== 3) {
         return console.log(MESSAGES.invalidInput);
       }
-      // TODO
+      await mv(argsInput[1], argsInput[2]);
       break;
     case "rm":
       if (argsInput.length !== 2) {
         return console.log(MESSAGES.invalidInput);
       }
-      // TODO
+      await remove(argsInput[1]);
       break;
     default:
       console.log(MESSAGES.invalidInput);
