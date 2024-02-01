@@ -1,3 +1,8 @@
+/**
+ * Go to dedicated folder from current directory
+ * @param {string} path - path to directory
+ */
+
 import { resolve } from "path";
 import { MESSAGES } from "../utils/constants.js";
 

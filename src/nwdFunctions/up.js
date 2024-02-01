@@ -1,3 +1,7 @@
+/**
+ * Go upper from current directory
+ */
+
 import { MESSAGES } from "../utils/constants.js";
 
 export const up = () => {

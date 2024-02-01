@@ -1,3 +1,9 @@
+/**
+ * Read file and print it's content in console
+ * @param {string} path - path to file
+ */
+
+
 import { createReadStream } from "fs";
 import { resolve } from "path";
 

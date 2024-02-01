@@ -1,3 +1,8 @@
+/**
+ * Create empty file in current working directory
+ * @param {string} name - new filename
+ */
+
 import { writeFile } from "fs/promises";
 import { join } from 'path';
 import { MESSAGES } from "../utils/constants.js";
