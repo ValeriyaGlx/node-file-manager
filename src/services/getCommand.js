@@ -1,6 +1,20 @@
-import { cd, cp, up, ls, add, cat, rn, mv, remove } from "../nwdFunctions/index.js";
+import { hash } from "../hash/hash.js";
+import {
+  cd,
+  cp,
+  up,
+  ls,
+  add,
+  cat,
+  rn,
+  mv,
+  remove,
+} from "../nwdFunctions/index.js";
+
+import {compress, decompress} from '../compress/index.js';
 
 import { MESSAGES } from "../utils/constants.js";
+import { os } from "../os/os.js";
 
 const parseInput = (input) => {
   const regex = /[^\s'"]+|['"]([^'"]*?)['"](?!['"])/gi;
@@ -75,6 +89,30 @@ export const getCommand = async (input) => {
       }
       await remove(argsInput[1]);
       break;
+    case "hash":
+      if (argsInput.length !== 2) {
+        return console.log(MESSAGES.invalidInput);
+      }
+      await hash(argsInput[1]);
+      break;
+    case "compress":
+      if (argsInput.length !== 3) {
+        return console.log(MESSAGES.invalidInput);
+      }
+      await compress(argsInput[1], argsInput[2]);
+      break;
+    case "decompress":
+      if (argsInput.length !== 3) {
+        return console.log(MESSAGES.invalidInput);
+      }
+      //TODO
+      break;
+    case "os":
+    if (argsInput.length !== 2) {
+      return console.log(MESSAGES.invalidInput);
+    }
+    os(argsInput[1]);
+    break;
     default:
       console.log(MESSAGES.invalidInput);
       break;

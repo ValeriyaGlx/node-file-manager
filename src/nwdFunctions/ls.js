@@ -20,7 +20,7 @@ export const ls = async () => {
         };
       })
     );
-    console.table(filesWithTypes);
+    console.table(filesWithTypes.sort((el1, el2) => el1.Type > el2.Type ? 1 : -1));
   } catch (error) {
     console.log(MESSAGES.failedOperation);
   }

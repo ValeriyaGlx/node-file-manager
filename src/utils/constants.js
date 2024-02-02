@@ -12,4 +12,7 @@ export const MESSAGES = {
   fileCopied: highlightWords('File successfully copied!', 'green'),
   fileMoved: highlightWords('File successfully moved!', 'green'),
   fileRemoved: highlightWords('File successfully removed!', 'green'),
+  fileCompressed: highlightWords('File successfully compressed!', 'green'),
+  fileDecompressed: highlightWords('File successfully decompressed!', 'green'),
+  EOL: (EOL) => `End of Line: ${JSON.stringify(EOL)}`,
 }
