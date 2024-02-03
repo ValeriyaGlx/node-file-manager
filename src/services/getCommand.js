@@ -105,7 +105,7 @@ export const getCommand = async (input) => {
       if (argsInput.length !== 3) {
         return console.log(MESSAGES.invalidInput);
       }
-      //TODO
+      await decompress(argsInput[1], argsInput[2]);
       break;
     case "os":
     if (argsInput.length !== 2) {

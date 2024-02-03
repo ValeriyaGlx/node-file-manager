@@ -6,21 +6,20 @@
 
 import { createReadStream, createWriteStream } from "fs";
 import zlib from "zlib";
-import { resolve, basename } from "path";
+import { resolve } from "path";
 
 import { MESSAGES } from "../utils/constants.js";
 
 //TODO have questions how it has to work
 
 export const compress = (pathFile, pathDirectory) => {
-  const fileName = basename(pathFile);
   const readStream = createReadStream(resolve(process.cwd(), pathFile));
   const writeStream = createWriteStream(resolve(process.cwd(), pathDirectory));
   const compressStream = zlib.createBrotliCompress();
   readStream.pipe(compressStream).pipe(writeStream);
 
   writeStream.on("finish", () => {
-    console.log(MESSAGES.fileCompressed);
+    console.log(MESSAGES.fileDecompressed);
   });
 
     readStream.on("error", () => {
