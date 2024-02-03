@@ -19,5 +19,3 @@ export const cat = async (path) => {
       console.log(MESSAGES.failedOperation);
     });
 };
-
-// TODO: think about path going before stream

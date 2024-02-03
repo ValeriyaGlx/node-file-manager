@@ -1,8 +1,8 @@
 import { highlightWords } from "./highlightWords.js";
 
 export const MESSAGES = {
-  greeting: (userName) => `Welcome to the File Manager, ${userName}!`,
-  farewell: (userName) => `Thank you for using File Manager, ${userName}, goodbye!`,
+  greeting: (userName) => highlightWords(`Welcome to the File Manager, ${userName}!`, 'yellow'),
+  farewell: (userName) => highlightWords(`Thank you for using File Manager, ${userName}, goodbye!`, 'yellow'),
   directory: (path) => `You are currently in: 📍 ${highlightWords(path, 'blue')}`,
   waiting: (userName) => highlightWords(`Waiting your command, ${userName} 💖`, 'yellow'),
   invalidInput: highlightWords('Invalid input', 'red'),

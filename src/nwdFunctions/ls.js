@@ -2,9 +2,6 @@
  * Print in console list of all files and folders in current directory.
  */
 
-//TODO need to sort
-
-
 import { readdir, stat } from "fs/promises";
 import { MESSAGES } from "../utils/constants.js";
 
@@ -20,7 +17,9 @@ export const ls = async () => {
         };
       })
     );
-    console.table(filesWithTypes.sort((el1, el2) => el1.Type > el2.Type ? 1 : -1));
+
+    const sortLs = [...filesWithTypes.filter((el) => el.Type === 'directory'), ...filesWithTypes.filter((el) => el.Type === 'file')];
+    console.table(sortLs);
   } catch (error) {
     console.log(MESSAGES.failedOperation);
   }

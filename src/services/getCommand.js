@@ -33,7 +33,6 @@ const parseInput = (input) => {
 
 export const getCommand = async (input) => {
   const argsInput = parseInput(input);
-  console.log(argsInput);
   switch (argsInput[0]) {
     case "up":
       if (argsInput.length > 1) {
