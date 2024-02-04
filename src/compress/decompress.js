@@ -18,7 +18,7 @@ export const decompress = (pathFile, pathDirectory) => {
   readStream.pipe(decompressStream).pipe(writeStream);
 
   writeStream.on("finish", () => {
-    console.log(MESSAGES.fileCompressed);
+    console.log(MESSAGES.fileDecompressed);
   });
 
   readStream.on("error", () => {

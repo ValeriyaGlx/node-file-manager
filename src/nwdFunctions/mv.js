@@ -4,8 +4,10 @@
  * @param {string} pathDirectory - path to a NEW directory
  */
 
-import { createReadStream, createWriteStream, rm } from "fs";
+import { createReadStream, createWriteStream } from "fs";
+import { rm } from "fs/promises";
 import { resolve, basename } from "path";
+import { pipeline } from "stream";
 
 import { MESSAGES } from "../utils/constants.js";
 
@@ -13,18 +15,13 @@ export const mv = async (pathFile, pathDirectory) => {
   const fileName = basename(pathFile);
   const readStream = createReadStream(resolve(process.cwd(), pathFile));
   const writeStream = createWriteStream(resolve(process.cwd(), pathDirectory, `${fileName}`));
-  readStream.pipe(writeStream);
 
-  writeStream.on("finish", () => {
-    rm(resolve(process.cwd(), pathFile));
-    console.log(MESSAGES.fileCopied);
-  });
-
-  readStream.on("error", (err) => {
-    console.error(MESSAGES.failedOperation);
-  });
-
-  writeStream.on("error", (err) => {
-    console.error(MESSAGES.failedOperation);
+  pipeline(readStream, writeStream, (error) => {
+    if (error) {
+      console.log(MESSAGES.failedOperation);
+    } else {
+      rm(resolve(process.cwd(), pathFile));
+      console.log(MESSAGES.fileMoved);
+    }
   });
 };

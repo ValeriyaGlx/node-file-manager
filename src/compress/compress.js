@@ -10,8 +10,6 @@ import { resolve } from "path";
 
 import { MESSAGES } from "../utils/constants.js";
 
-//TODO have questions how it has to work
-
 export const compress = (pathFile, pathDirectory) => {
   const readStream = createReadStream(resolve(process.cwd(), pathFile));
   const writeStream = createWriteStream(resolve(process.cwd(), pathDirectory));
@@ -19,7 +17,7 @@ export const compress = (pathFile, pathDirectory) => {
   readStream.pipe(compressStream).pipe(writeStream);
 
   writeStream.on("finish", () => {
-    console.log(MESSAGES.fileDecompressed);
+    console.log(MESSAGES.fileCompressed);
   });
 
     readStream.on("error", () => {
