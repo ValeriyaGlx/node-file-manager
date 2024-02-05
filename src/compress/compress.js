@@ -20,7 +20,6 @@ export const compress = (pathFile, pathDirectory) => {
   pipeline(readStream, compressStream, writeStream, (error) => {
     if(error) {
       console.log(MESSAGES.failedOperation);
-      writeStream.destroy();
     } else {
       console.log(MESSAGES.fileCompressed);
     }
