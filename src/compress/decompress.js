@@ -5,23 +5,34 @@
  */
 
 import { createReadStream, createWriteStream } from "fs";
+import { access, constants } from "fs/promises";
+
 import zlib from "zlib";
 import { resolve } from "path";
 import { pipeline } from "stream";
 
-
 import { MESSAGES } from "../utils/constants.js";
 
-export const decompress = (pathFile, pathDirectory) => {
-  const readStream = createReadStream(resolve(process.cwd(), pathFile));
-  const writeStream = createWriteStream(resolve(process.cwd(), pathDirectory));
-  const decompressStream = zlib.createBrotliDecompress();
+export const decompress = async (pathFile, pathDirectory) => {
+  const filePath = resolve(process.cwd(), pathFile);
 
-  pipeline(readStream, decompressStream, writeStream, (error) => {
-    if(error) {
-      console.log(MESSAGES.failedOperation);
-    } else {
-      console.log(MESSAGES.fileDecompressed);
-    }
-  });
+  try {
+    await access(filePath);
+
+    const readStream = createReadStream(filePath);
+    const writeStream = createWriteStream(
+      resolve(process.cwd(), pathDirectory)
+    );
+    const decompressStream = zlib.createBrotliDecompress();
+
+    pipeline(readStream, decompressStream, writeStream, (error) => {
+      if (error) {
+        console.log(MESSAGES.failedOperation);
+      } else {
+        console.log(MESSAGES.fileDecompressed);
+      }
+    });
+  } catch (error) {
+    console.log(MESSAGES.failedOperation);
+  }
 };

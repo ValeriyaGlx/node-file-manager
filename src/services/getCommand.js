@@ -11,7 +11,7 @@ import {
   remove,
 } from "../nwdFunctions/index.js";
 
-import {compress, decompress} from '../compress/index.js';
+import { compress, decompress } from "../compress/index.js";
 
 import { MESSAGES } from "../utils/constants.js";
 import { os } from "../os/os.js";
@@ -107,11 +107,11 @@ export const getCommand = async (input) => {
       await decompress(argsInput[1], argsInput[2]);
       break;
     case "os":
-    if (argsInput.length !== 2) {
-      return console.log(MESSAGES.invalidInput);
-    }
-    os(argsInput[1]);
-    break;
+      if (argsInput.length !== 2) {
+        return console.log(MESSAGES.invalidInput);
+      }
+      os(argsInput[1]);
+      break;
     default:
       console.log(MESSAGES.invalidInput);
       break;
