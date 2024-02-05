@@ -7,6 +7,8 @@
 import { createReadStream, createWriteStream } from "fs";
 import zlib from "zlib";
 import { resolve } from "path";
+import { pipeline } from "stream";
+
 
 import { MESSAGES } from "../utils/constants.js";
 
@@ -14,19 +16,13 @@ export const compress = (pathFile, pathDirectory) => {
   const readStream = createReadStream(resolve(process.cwd(), pathFile));
   const writeStream = createWriteStream(resolve(process.cwd(), pathDirectory));
   const compressStream = zlib.createBrotliCompress();
-  readStream.pipe(compressStream).pipe(writeStream);
 
-  writeStream.on("finish", () => {
-    console.log(MESSAGES.fileCompressed);
-  });
-
-    readStream.on("error", () => {
+  pipeline(readStream, compressStream, writeStream, (error) => {
+    if(error) {
       console.log(MESSAGES.failedOperation);
-    });
-    compressStream.on("error", () => {
-      console.log(MESSAGES.failedOperation);
-    });
-    writeStream.on("error", () => {
-      console.log(MESSAGES.failedOperation);
-    });
+      writeStream.destroy();
+    } else {
+      console.log(MESSAGES.fileCompressed);
+    }
+  })
 };
